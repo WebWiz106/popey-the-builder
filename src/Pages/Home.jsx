@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import Navbar1 from "../Templates/T1/Navbar1";
-// import Navbar2 from "../Templates/T2/Navbar2";
-// import Navbar3 from "../Templates/T3/Navbar3";
-// import Navbar4 from "../Templates/T4/Navbar4";
-// import Navbar5 from "../Templates/T5/Navbar5";
-// import Navbar6 from "../Templates/T6/Navbar6";
+import Navbar2 from "../Templates/T2/Navbar2";
+import Navbar3 from "../Templates/T3/Navbar3";
+import Navbar4 from "../Templates/T4/Navbar4";
+import Navbar5 from "../Templates/T5/Navbar5";
+import Navbar6 from "../Templates/T6/Navbar6";
 
 import Banner1 from "../Templates/T1/Banner1";
 // import Banner2 from "../Templates/T2/Banner2";
@@ -13,7 +13,7 @@ import Banner1 from "../Templates/T1/Banner1";
 // import Banner5 from "../Templates/T5/Banner5";
 // import Banner6 from "../Templates/T6/Banner6";
 
-// import About1 from "../Templates/T1/About1";
+import About1 from "../Templates/T1/About1";
 // import About2 from "../Templates/T2/About2";
 // import About3 from "../Templates/T3/About3";
 // import About4 from "../Templates/T4/About4";
@@ -41,19 +41,38 @@ import Banner1 from "../Templates/T1/Banner1";
 // import Nearby5 from "../Templates/T5/Nearby5";
 // import Nearby6 from "../Templates/T6/Nearby6";
 
-function Home({websiteData}) {
+function Home({ websiteData }) {
+  const navbar = websiteData.Navbar;
+  const componentsOrder = websiteData.componentsOrder;
+  console.log(componentsOrder);
+  const navnum = navbar.Type;
+  const Navbar = [
+    "",
+    <Navbar1 websiteData={websiteData} />,
+    <Navbar2 websiteData={websiteData} />,
+    <Navbar3 websiteData={websiteData} />,
+    <Navbar4 websiteData={websiteData} />,
+    <Navbar5 websiteData={websiteData} />,
+  ];
   return (
     <>
-    <Navbar1 websiteData={websiteData} />
-    <Banner1 bannerdata={websiteData?.Home?.Banner} />
-    {/* <About1 /> */}
-    {/* <Facilities1 /> */}
-    {/* <Nearby1 /> */}
-    {/* <Footer1 /> */}
-    
-    
+      <div className="d-flex flex-column">
+        <div className={`order-${componentsOrder.navbar} `}>
+          {Navbar[navnum]}
+        </div>
+        {/* <Navbar2 websiteData={websiteData} /> */}
+        <div className={`order-${componentsOrder.banner}`}>
+          <Banner1 bannerdata={websiteData?.Home?.Banner} />
+        </div>
+        <div className={`order-${componentsOrder.about}`}>
+          <About1 />
+        </div>
+        {/* <Facilities1 /> */}
+        {/* <Nearby1 /> */}
+        {/* <Footer1 /> */}
+      </div>
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;
